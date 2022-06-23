@@ -31,19 +31,6 @@
               </div>
             </form>
           </mat-step>
-          <!-- <mat-step [stepControl]="secondFormGroup">
-            <form [formGroup]="secondFormGroup">
-              <ng-template matStepLabel>Last name</ng-template>
-              <mat-form-field>
-                <mat-label>Last Name</mat-label>
-                <input matInput placeholder="Last name" formControlName="secondCtrl" name="secondCtrl" required>
-              </mat-form-field>
-              <div>
-                <button mat-button matStepperPrevious>Back</button>
-                <button mat-button matStepperNext>Next</button>
-              </div>
-            </form>
-          </mat-step> -->
           <!-- next of kin -->
           <mat-step [stepControl]="secondFormGroup">
             <form [formGroup]="secondFormGroup">
@@ -51,12 +38,12 @@
               <div class="form-inputs">
                 <mat-form-field>
                   <mat-label>First Name</mat-label>
-                  <input matInput formControlName="nokCtrl" name="nokCtrl" required>
+                  <input matInput formControlName="nokCtrlName" name="nokCtrlName" required>
                 </mat-form-field>
                 <span class="example-spacer"></span>
                 <mat-form-field>
                   <mat-label>Last Name</mat-label>
-                  <input matInput formControlName="nokCtrl" name="nokCtrl" required>
+                  <input matInput formControlName="nokCtrlLastName" name="nokCtrlLastName" required>
                 </mat-form-field>
                 <span class="example-spacer"></span>
                 <mat-form-field>
@@ -81,11 +68,7 @@
                 </mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
               </mat-form-field>
-              <!-- <mat-form-field>
-                <mat-label>Date of birth</mat-label>
-                <input matInput formControlName="thirdCtrl" name="thirdCtrl" placeholder="Ex. 1 Main St, New York, NY"
-                       required>
-              </mat-form-field> -->
+              
               <div>
                 <button mat-button matStepperPrevious>Back</button>
                 <button mat-button matStepperNext>Next</button>
@@ -109,7 +92,7 @@
            
             <div>
               <button mat-button (click)="stepper.reset()">Reset</button>
-              <button mat-button matStepperPrevious>Finish</button>
+              <button mat-button (click)="uploadForm()" matStepperPrevious>Finish</button>
             </div>
           </mat-step>
         </mat-vertical-stepper>

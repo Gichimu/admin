@@ -1,13 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
+
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  providers: [{
+    provide: STEPPER_GLOBAL_OPTIONS, useValue: {showError: true, displayDefaultIndicatorType: false}
+  }]
 })
 export class HomeComponent implements OnInit {
   isLinear = false;
+  photoUrl: string = "";
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   thirdFormGroup: FormGroup;
@@ -29,7 +35,8 @@ export class HomeComponent implements OnInit {
       lastCtrl: ['', Validators.required]
     });
     this.secondFormGroup = this._formBuilder.group({
-      nokCtrl: ['', Validators.required],
+      nokCtrlName: ['', Validators.required],
+      nokCtrlLastName: ['', Validators.required],
       nokCtrlNumber: ['', Validators.required]
     });
     this.thirdFormGroup = this._formBuilder.group({
@@ -40,7 +47,21 @@ export class HomeComponent implements OnInit {
   }
 
   handleUpload(e){
-    console.log(e)
+    this.photoUrl = e.cdnUrl
+  }
+
+  uploadForm(){
+    const data = {
+      "firstName" : this.firstFormGroup.value.firstCtrl,
+      "middleName" : this.firstFormGroup.value.secondCtrl,
+      "lastName" : this.firstFormGroup.value.lastCtrl,
+      "nokName" : this.secondFormGroup.value.nokCtrlName,
+      "nokLastName" : this.secondFormGroup.value.nokCtrlLastName,
+      "nokNumber" : this.secondFormGroup.value.nokCtrlNumber,
+      "dob" : this.thirdFormGroup.value.thirdCtrl,
+      "photoUrl" : this.photoUrl
+    }
+    console.log(data)
   }
 
 }
