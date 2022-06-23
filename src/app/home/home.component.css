@@ -1,0 +1,25 @@
+
+
+mat-card {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   width: 50vw;
+}
+
+.mat-stepper-vertical {
+  margin-top: 8px;
+}
+
+.mat-form-field {
+  margin-top: 16px;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.form-inputs {
+  display: flex;
+}
