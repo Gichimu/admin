@@ -1,114 +1,118 @@
 <div class="container">
+    
+   <div class="content">
+     <h3 class="text-center">Create Child Record</h3>
     <mat-card>
-        <!-- <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear"> 
-            {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
-          </button> -->
-          <mat-vertical-stepper [linear]="isLinear" #stepper>
-            <mat-step [stepControl]="firstFormGroup">
-              <form [formGroup]="firstFormGroup">
-                <ng-template matStepLabel>Full name</ng-template>
-                <div class="form-inputs">
-                  <mat-form-field>
-                    <mat-label>First Name</mat-label>
-                    <input matInput formControlName="firstCtrl" name="firstCtrl" required>
-                  </mat-form-field>
-                  <span class="example-spacer"></span>
-                  <mat-form-field>
-                    <mat-label>Middle Name</mat-label>
-                    <input matInput formControlName="secondCtrl" name="secondCtrl" required>
-                  </mat-form-field>
-                  <span class="example-spacer"></span>
-                  <mat-form-field>
-                    <mat-label>Last Name</mat-label>
-                    <input matInput formControlName="lastCtrl" name="lastCtrl" required>
-                  </mat-form-field>
-                </div>
-                <div>
-                  <button mat-button matStepperNext>Next</button>
-                </div>
-              </form>
-            </mat-step>
-            <!-- <mat-step [stepControl]="secondFormGroup">
-              <form [formGroup]="secondFormGroup">
-                <ng-template matStepLabel>Last name</ng-template>
+      <!-- <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear"> 
+          {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
+        </button> -->
+        <mat-vertical-stepper [linear]="isLinear" #stepper>
+          <mat-step [stepControl]="firstFormGroup">
+            <form [formGroup]="firstFormGroup">
+              <ng-template matStepLabel>Full name</ng-template>
+              <div class="form-inputs">
+                <mat-form-field>
+                  <mat-label>First Name</mat-label>
+                  <input matInput formControlName="firstCtrl" name="firstCtrl" required>
+                </mat-form-field>
+                <span class="example-spacer"></span>
+                <mat-form-field>
+                  <mat-label>Middle Name</mat-label>
+                  <input matInput formControlName="secondCtrl" name="secondCtrl" required>
+                </mat-form-field>
+                <span class="example-spacer"></span>
                 <mat-form-field>
                   <mat-label>Last Name</mat-label>
-                  <input matInput placeholder="Last name" formControlName="secondCtrl" name="secondCtrl" required>
+                  <input matInput formControlName="lastCtrl" name="lastCtrl" required>
                 </mat-form-field>
-                <div>
-                  <button mat-button matStepperPrevious>Back</button>
-                  <button mat-button matStepperNext>Next</button>
-                </div>
-              </form>
-            </mat-step> -->
-            <!-- next of kin -->
-            <mat-step [stepControl]="secondFormGroup">
-              <form [formGroup]="secondFormGroup">
-                <ng-template matStepLabel>Next of kin</ng-template>
-                <div class="form-inputs">
-                  <mat-form-field>
-                    <mat-label>First Name</mat-label>
-                    <input matInput formControlName="nokCtrl" name="nokCtrl" required>
-                  </mat-form-field>
-                  <span class="example-spacer"></span>
-                  <mat-form-field>
-                    <mat-label>Last Name</mat-label>
-                    <input matInput formControlName="nokCtrl" name="nokCtrl" required>
-                  </mat-form-field>
-                  <span class="example-spacer"></span>
-                  <mat-form-field>
-                    <mat-label>Phone</mat-label>
-                    <input matInput formControlName="nokCtrl" type="number" name="nokCtrl" required>
-                  </mat-form-field>
-                </div>
-                <div>
-                  <button mat-button matStepperPrevious>Back</button>
-                  <button mat-button matStepperNext>Next</button>
-                </div>
-              </form>
-            </mat-step>
-            <mat-step [stepControl]="thirdFormGroup">
-              <form [formGroup]="thirdFormGroup">
-                <ng-template matStepLabel>Date of birth</ng-template>
-                <mat-form-field class="example-full-width" appearance="fill">
-                  <mat-label>Choose a date</mat-label>
-                  <input matInput formControlName="thirdCtrl" name="thirdCtrl" [matDatepicker]="picker" [matDatepickerFilter]="myFilter">
-                  <mat-datepicker-toggle matSuffix [for]="picker">
-                    <mat-icon matDatepickerToggleIcon>calendar_month</mat-icon>
-                  </mat-datepicker-toggle>
-                  <mat-datepicker #picker></mat-datepicker>
-                </mat-form-field>
-                <!-- <mat-form-field>
-                  <mat-label>Date of birth</mat-label>
-                  <input matInput formControlName="thirdCtrl" name="thirdCtrl" placeholder="Ex. 1 Main St, New York, NY"
-                         required>
-                </mat-form-field> -->
-                <div>
-                  <button mat-button matStepperPrevious>Back</button>
-                  <button mat-button matStepperNext>Next</button>
-                </div>
-              </form>
-            </mat-step>
-            <mat-step>
-              <ng-template matStepLabel>Upload picture</ng-template>
-              <ngx-uploadcare-widget
-                images-only="true"
-                (on-upload-complete)="handleUpload($event)"
-                public-key="bfdb08a1fed1afb78693">
-              </ngx-uploadcare-widget>
+              </div>
+              <div>
+                <button mat-button matStepperNext>Next</button>
+              </div>
+            </form>
+          </mat-step>
+          <!-- <mat-step [stepControl]="secondFormGroup">
+            <form [formGroup]="secondFormGroup">
+              <ng-template matStepLabel>Last name</ng-template>
+              <mat-form-field>
+                <mat-label>Last Name</mat-label>
+                <input matInput placeholder="Last name" formControlName="secondCtrl" name="secondCtrl" required>
+              </mat-form-field>
               <div>
                 <button mat-button matStepperPrevious>Back</button>
                 <button mat-button matStepperNext>Next</button>
               </div>
-            </mat-step>
-            <mat-step>
-              <ng-template matStepLabel>Done</ng-template>
-             
-              <div>
-                <button mat-button (click)="stepper.reset()">Reset</button>
-                <button mat-button matStepperPrevious>Finish</button>
+            </form>
+          </mat-step> -->
+          <!-- next of kin -->
+          <mat-step [stepControl]="secondFormGroup">
+            <form [formGroup]="secondFormGroup">
+              <ng-template matStepLabel>Next of kin</ng-template>
+              <div class="form-inputs">
+                <mat-form-field>
+                  <mat-label>First Name</mat-label>
+                  <input matInput formControlName="nokCtrl" name="nokCtrl" required>
+                </mat-form-field>
+                <span class="example-spacer"></span>
+                <mat-form-field>
+                  <mat-label>Last Name</mat-label>
+                  <input matInput formControlName="nokCtrl" name="nokCtrl" required>
+                </mat-form-field>
+                <span class="example-spacer"></span>
+                <mat-form-field>
+                  <mat-label>Phone</mat-label>
+                  <input matInput formControlName="nokCtrlNumber" type="number" name="nokCtrlNumber" required>
+                </mat-form-field>
               </div>
-            </mat-step>
-          </mat-vertical-stepper>
-    </mat-card>
+              <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext>Next</button>
+              </div>
+            </form>
+          </mat-step>
+          <mat-step [stepControl]="thirdFormGroup">
+            <form [formGroup]="thirdFormGroup">
+              <ng-template matStepLabel>Date of birth</ng-template>
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Choose a date</mat-label>
+                <input matInput formControlName="thirdCtrl" name="thirdCtrl" [matDatepicker]="picker" [matDatepickerFilter]="myFilter">
+                <mat-datepicker-toggle matSuffix [for]="picker">
+                  <mat-icon matDatepickerToggleIcon>calendar_month</mat-icon>
+                </mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+              <!-- <mat-form-field>
+                <mat-label>Date of birth</mat-label>
+                <input matInput formControlName="thirdCtrl" name="thirdCtrl" placeholder="Ex. 1 Main St, New York, NY"
+                       required>
+              </mat-form-field> -->
+              <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext>Next</button>
+              </div>
+            </form>
+          </mat-step>
+          <mat-step>
+            <ng-template matStepLabel>Upload picture</ng-template>
+            <ngx-uploadcare-widget
+              images-only="true"
+              (on-upload-complete)="handleUpload($event)"
+              public-key="bfdb08a1fed1afb78693">
+            </ngx-uploadcare-widget>
+            <div>
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-button matStepperNext>Next</button>
+            </div>
+          </mat-step>
+          <mat-step>
+            <ng-template matStepLabel>Done</ng-template>
+           
+            <div>
+              <button mat-button (click)="stepper.reset()">Reset</button>
+              <button mat-button matStepperPrevious>Finish</button>
+            </div>
+          </mat-step>
+        </mat-vertical-stepper>
+  </mat-card>
+   </div>
 </div>

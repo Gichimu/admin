@@ -15,21 +15,22 @@ export class HomeComponent implements OnInit {
   constructor(private _formBuilder: FormBuilder) { }
 
   myFilter = (d: Date | null): boolean => {
-    const day = (d || new Date()).getDay();
-    const today = new Date();
+    const day = d || new Date();
+    const today = new Date().getFullYear();
     // Prevent all days after today from being selected
-    if(Date.get < Date.now()){
-      return day;
-    }
+    return !(day.getTime() > Date.parse(Date()))
+    
   }
 
   ngOnInit(): void {
     this.firstFormGroup = this._formBuilder.group({
       firstCtrl: ['', Validators.required],
-      secondCtrl: ['', Validators.required]
+      secondCtrl: ['', Validators.required],
+      lastCtrl: ['', Validators.required]
     });
     this.secondFormGroup = this._formBuilder.group({
-      secondCtrl: ['', Validators.required]
+      nokCtrl: ['', Validators.required],
+      nokCtrlNumber: ['', Validators.required]
     });
     this.thirdFormGroup = this._formBuilder.group({
       thirdCtrl: ['', Validators.required]
