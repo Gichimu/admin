@@ -80,7 +80,9 @@
             <ngx-uploadcare-widget
               images-only="true"
               (on-upload-complete)="handleUpload($event)"
-              public-key="bfdb08a1fed1afb78693">
+              public-key="bfdb08a1fed1afb78693"
+              crop="free"
+              image-shrink="800x600">
             </ngx-uploadcare-widget>
             <div>
               <button mat-button matStepperPrevious>Back</button>
