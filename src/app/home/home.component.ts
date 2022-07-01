@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
+import { matDrawerAnimations } from '@angular/material/sidenav';
 
 
 @Component({
@@ -12,13 +13,18 @@ import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
   }]
 })
 export class HomeComponent implements OnInit {
+  opened: boolean;
   isLinear = false;
   photoUrl: string = "";
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   thirdFormGroup: FormGroup;
 
+  
+
   constructor(private _formBuilder: FormBuilder) { }
+
+  
 
   myFilter = (d: Date | null): boolean => {
     const day = d || new Date();
@@ -43,7 +49,6 @@ export class HomeComponent implements OnInit {
       thirdCtrl: ['', Validators.required]
     });
 
-    
   }
 
   handleUpload(e){
@@ -63,5 +68,7 @@ export class HomeComponent implements OnInit {
     }
     console.log(data)
   }
+
+
 
 }

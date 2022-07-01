@@ -32,3 +32,21 @@
     width: 80%;
     margin: 20px auto;
   }
+
+  .divider {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+
+
+  .divider-text::before, .divider-text::after {
+    width: auto;
+    display: block;
+    height: 1px;
+    background-color: black;
+    content: "";
+  }
+
+  

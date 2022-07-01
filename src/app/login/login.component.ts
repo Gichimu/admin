@@ -7,6 +7,7 @@ import { FormControl, FormsModule, NgForm, NgModel } from '@angular/forms';
 import firebase from 'firebase/app';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { User } from '../user'
 
 @Component({
   selector: 'app-login',
@@ -18,6 +19,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   emailText: string;
   usernameText: string;
   selectedIndex: number;
+  user: User;
   googleLogin = true;
   modelEmail: string;
   modelPassword: string;
@@ -55,6 +57,8 @@ export class LoginComponent implements OnInit, OnDestroy {
         takeUntil(this.destroyed$)
       )
       .subscribe((authState) => {
+    
+        // console.log(authState.user)
         this.router.navigate(['home']);
       });
   }

@@ -12,6 +12,10 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [],
@@ -25,7 +29,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MatDatepickerModule,
     MatNativeDateModule,
     MatIconModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatDividerModule
   ],
   exports: [
     MatButtonModule,
@@ -39,7 +44,11 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MatTabsModule,
     MatCheckboxModule,
     MatSnackBarModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatDividerModule,
+    MatToolbarModule,
+    MatListModule,
+    MatMenuModule
   ]
 })
 export class AppMaterialModule { }

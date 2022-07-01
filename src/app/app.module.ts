@@ -10,12 +10,22 @@ import { AppFirebaseModule } from './app-firebase.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UcWidgetModule } from 'ngx-uploadcare-widget';
 import { LoginComponent } from './login/login.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { SidenavComponent } from './sidenav/sidenav.component';
+import { AddkidComponent } from './addkid/addkid.component';
+import { ProfileComponent } from './profile/profile.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    DashboardComponent,
+    SidenavComponent,
+    AddkidComponent,
+    ProfileComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

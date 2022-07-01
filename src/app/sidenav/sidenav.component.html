@@ -1,0 +1,52 @@
+<mat-drawer-container class="example-container">
+  <mat-drawer
+    mode="side"
+    [class.sidenav-open]="open"
+    [class.sidenav-close]="!open"
+    opened
+  >
+    <mat-drawer-container
+      #drawer
+      class="example-container"
+      (mouseenter)="sidenavToggle()"
+      (mouseleave)="sidenavToggle()"
+    >
+      <mat-drawer class="example-sidenav" mode="side"> </mat-drawer>
+
+      <div class="example-sidenav-content">
+        <span>
+          
+          <button class="menu-item profile" type="button" (click)="getRoute('profile')"  mat-mini-fab>
+            <img class="menu-img" src="{{photoUrl}}" alt="">
+            <span class="menu-name">{{displayName}}</span>
+          </button>
+          
+          <mat-divider></mat-divider>
+          <div class="side-menu">
+            <button class="menu-item" type="button" mat-button (click)="getRoute('dashboard')">
+              <mat-icon class="menu-icon">dashboard</mat-icon> Dashboard
+            </button>
+
+            <button class="menu-item" type="button" (click)="getRoute('addKid')" mat-button>
+              <mat-icon class="menu-icon">person_add</mat-icon> Create new
+            </button>
+            <br>
+            <button class="menu-item" type="button" mat-button (click)="drawer.toggle()">
+              <mat-icon class="menu-icon">search</mat-icon>Quick search
+            </button>
+            <button class="menu-item exit" type="button" mat-button (click)="drawer.toggle()">
+              <mat-icon class="menu-icon">logout</mat-icon> Exit 
+            </button>
+          </div>
+        </span>
+      </div>
+    </mat-drawer-container>
+  </mat-drawer>
+  <mat-drawer-content [ngStyle]="{ 'margin-left.px': contentMargin }">
+    <div class="container">
+      <div class="main-content">
+        <ng-container *ngComponentOutlet="navigatedRoute"></ng-container>
+      </div>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>
