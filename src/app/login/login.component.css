@@ -36,17 +36,18 @@
   .divider {
     display: flex;
     flex-direction: row;
-    align-items: center;
-    justify-content: space-evenly;
+    margin-top: 1em;
   }
 
-
-  .divider-text::before, .divider-text::after {
-    width: auto;
-    display: block;
-    height: 1px;
+  hr {
+    border: 0;
+    width: 28%;
     background-color: black;
-    content: "";
+    height: 1px;
+  }
+  
+  .divider-text {
+    margin: .5em 0 1em 0;
   }
 
   

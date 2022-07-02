@@ -44,7 +44,8 @@ export class LoginComponent implements OnInit, OnDestroy {
         takeUntil(this.destroyed$)
       )
       .subscribe((authState) => {
-        this.router.navigate(['room']);
+        console.log(authState)
+        this.router.navigate(['home']);
       });
   }
 

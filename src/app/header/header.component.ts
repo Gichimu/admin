@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -8,6 +9,7 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  destroyed$: Subject<null> = new Subject();
 
   constructor(private authService: AuthService, private router: Router) { }
 
@@ -17,7 +19,12 @@ export class HeaderComponent implements OnInit {
   logout(){
     this.authService.logout().subscribe(authState => {
       console.log(authState)
+      this.ngOnDestroy();
       this.router.navigate(['login']);
     })
+  }
+
+  ngOnDestroy(): void {
+    this.destroyed$.next();
   }
 }
