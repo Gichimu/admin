@@ -1,0 +1,39 @@
+.example-form-field {
+  width: 30%;
+  margin: 0 auto;
+}
+mat-card-content {
+    margin-top: 2em;
+}
+.inner-content {
+  display: grid;
+  grid-template-columns: auto auto;
+}
+.example-card {
+  max-width: 25%;
+  margin: .5em;
+}
+
+.preferences-icons {
+  width: 3%;
+  display: flex;
+  position: absolute;
+  right: 5em;
+}
+
+.preferences-icons button {
+  width: .2em;
+  outline: none;
+}
+
+.preferences-icons:nth-child(odd) {
+  border-right: 1px solid black;
+}
+
+.divider {
+  width: 3px;
+  height: 1px;
+  background-color: black;
+  z-index: 10;
+}
+

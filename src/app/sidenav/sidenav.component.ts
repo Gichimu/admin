@@ -7,6 +7,7 @@ import { AddkidComponent } from '../addkid/addkid.component';
 import { User } from '../user';
 import { AuthService } from '../services/auth.service';
 import { Observable } from 'rxjs';
+import { SearchComponent } from '../search/search.component';
 
 @Component({
   selector: 'app-sidenav',
@@ -42,6 +43,8 @@ export class SidenavComponent implements OnInit {
       this.navigatedRoute = ProfileComponent
     }else if(myRoute == 'addKid'){
       this.navigatedRoute = AddkidComponent
+    }else if(myRoute == 'search'){
+      this.navigatedRoute = SearchComponent
     }
     return this.navigatedRoute
   }

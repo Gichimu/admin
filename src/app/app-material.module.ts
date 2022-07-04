@@ -16,6 +16,8 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [],
@@ -48,7 +50,9 @@ import { MatMenuModule } from '@angular/material/menu';
     MatDividerModule,
     MatToolbarModule,
     MatListModule,
-    MatMenuModule
+    MatMenuModule,
+    MatButtonToggleModule,
+    MatSelectModule
   ]
 })
 export class AppMaterialModule { }

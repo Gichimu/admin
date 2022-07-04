@@ -15,6 +15,8 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 import { AddkidComponent } from './addkid/addkid.component';
 import { ProfileComponent } from './profile/profile.component';
 import { HeaderComponent } from './header/header.component';
+import { SearchComponent } from './search/search.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { HeaderComponent } from './header/header.component';
     SidenavComponent,
     AddkidComponent,
     ProfileComponent,
-    HeaderComponent
+    HeaderComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +38,8 @@ import { HeaderComponent } from './header/header.component';
     FormsModule,
     ReactiveFormsModule,
     UcWidgetModule,
-    AppFirebaseModule
+    AppFirebaseModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
