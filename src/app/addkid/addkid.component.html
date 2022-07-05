@@ -15,7 +15,7 @@
                 <div class="bio">
                   <mat-form-field>
                     <mat-label>First Name</mat-label>
-                    <input 
+                    <input
                       matInput
                       formControlName="firstCtrl"
                       name="firstCtrl"
@@ -39,18 +39,16 @@
                       matInput
                       formControlName="lastCtrl"
                       name="lastCtrl"
-                      
                     />
                   </mat-form-field>
                 </div>
-                
 
                 <div>
                   <mat-form-field>
                     <mat-label>Gender</mat-label>
-                    <mat-select formControlName="gender" name="gende" required>
+                    <mat-select formControlName="gender" name="gender" required>
                       <mat-option *ngFor="let sex of sexes" [value]="sex.value">
-                        {{sex.viewValue}}
+                        {{ sex.viewValue }}
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
@@ -118,9 +116,16 @@
                 <div>
                   <mat-form-field>
                     <mat-label>Relation</mat-label>
-                    <mat-select formControlName="relation" name="relation" required>
-                      <mat-option *ngFor="let relation of relations" [value]="relation.value">
-                        {{relation.viewValue}}
+                    <mat-select
+                      formControlName="relation"
+                      name="relation"
+                      required
+                    >
+                      <mat-option
+                        *ngFor="let relation of relations"
+                        [value]="relation.value"
+                      >
+                        {{ relation.viewValue }}
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
@@ -157,6 +162,109 @@
               </div>
             </form>
           </mat-step>
+          <mat-step [stepControl]="fourthFormGroup">
+            <form
+              [formGroup]="fourthFormGroup"
+              errorMessage="Check as appropriate."
+            >
+              <ng-template matStepLabel>Academic Details</ng-template>
+              <div class="form-inputs">
+                <mat-slide-toggle
+                  [(ngModel)]="isChecked"
+                  (change)="changed()"
+                  formControlName="enrolled"
+                  >{{ checkvalue }}</mat-slide-toggle
+                >
+
+                <div *ngIf="isChecked" class="bio">
+                  <mat-form-field
+                    class="example-full-width"
+                    appearance="legacy"
+                  >
+                    <mat-label>Level</mat-label>
+                    <mat-select formControlName="level" name="level" required>
+                      <mat-option
+                        *ngFor="let level of levels"
+                        [value]="level.value"
+                        (selectionChange)="checkLevel()"
+                      >
+                        {{ level.viewValue }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <div *ngIf="isPrimary; else elseblock">
+                    <mat-form-field
+                      class="example-full-width"
+                      appearance="legacy"
+                    >
+                      <mat-label>School</mat-label>
+                      <mat-select
+                        formControlName="primarySchool"
+                        name="primarySchool"
+                        required
+                      >
+                        <mat-option
+                          *ngFor="let primarySchool of primarySchools"
+                          [value]="primarySchool.value"
+                        >
+                          {{ primarySchool.viewValue }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <mat-form-field
+                      class="example-full-width"
+                      appearance="legacy"
+                    >
+                      <mat-label>Class</mat-label>
+                      <mat-select formControlName="class" name="class" required>
+                        <mat-option
+                          *ngFor="let class of classes"
+                          [value]="class.value"
+                        >
+                          {{ class.viewValue }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <ng-template #elseblock>
+                    <mat-form-field
+                    class="example-full-width"
+                    appearance="legacy"
+                  >
+                    <mat-label>School</mat-label>
+                    <mat-select formControlName="school" name="school" required>
+                      <mat-option
+                        *ngFor="let school of schools"
+                        [value]="school.value"
+                      >
+                        {{ school.viewValue }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-form-field
+                    class="example-full-width"
+                    appearance="legacy"
+                  >
+                    <mat-label>Form</mat-label>
+                    <mat-select formControlName="form" name="form" required>
+                      <mat-option
+                        *ngFor="let form of forms"
+                        [value]="form.value"
+                      >
+                        {{ form.viewValue }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  </ng-template>
+                </div>
+              </div>
+
+              <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext>Next</button>
+              </div>
+            </form>
+          </mat-step>
           <mat-step>
             <ng-template matStepLabel>Upload picture</ng-template>
             <ngx-uploadcare-widget
@@ -173,13 +281,11 @@
             </div>
           </mat-step>
           <mat-step>
-            <ng-template matStepLabel>Done</ng-template>
+            <ng-template matStepLabel>Finish</ng-template>
 
             <div>
-              <button mat-button (click)="stepper.reset()">Reset</button>
-              <button mat-button (click)="uploadForm()">
-                Finish
-              </button>
+              <button mat-button (click)="stepper.reset()">Add another</button>
+              <button mat-button (click)="uploadForm()">Submit</button>
             </div>
           </mat-step>
         </mat-vertical-stepper>
