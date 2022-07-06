@@ -9,6 +9,25 @@ interface Sex {
   viewValue: string;
 }
 
+interface Kid {
+  firstName: string;
+  middleName: string;
+  lastName?: string;
+  gender: string;
+  nokFirstName: string;
+  nokMiddleName: string;
+  nokNumber: number;
+  relation: string;
+  dob: Date;
+  isEnrolled: boolean;
+  level?: string;
+  primarySchool?: string;
+  class?: string;
+  school?: string;
+  form?: string;
+  photoUrl: string;
+}
+
 @Component({
   selector: 'app-addkid',
   templateUrl: './addkid.component.html',
@@ -155,7 +174,7 @@ export class AddkidComponent implements OnInit {
   }
 
   uploadForm() {
-    const data = {
+    const data: Kid = {
       firstName: this.firstFormGroup.value.firstCtrl,
       middleName: this.firstFormGroup.value.secondCtrl,
       lastName: this.firstFormGroup.value.lastCtrl,

@@ -2,8 +2,10 @@
   <div class="content">
     <mat-card>
       <mat-card-content>
-        <h3 class="text-center">Create Child Record</h3>
-
+        <div class="text-center">
+          <h2>Create Child Record</h2>
+          <mat-hint>Fields marked with '*' are required</mat-hint>
+        </div>
         <mat-vertical-stepper linear #stepper>
           <mat-step
             [stepControl]="firstFormGroup"
@@ -137,6 +139,7 @@
               </div>
             </form>
           </mat-step>
+
           <mat-step [stepControl]="thirdFormGroup">
             <form [formGroup]="thirdFormGroup" errorMessage="Dob is required.">
               <ng-template matStepLabel>Date of birth</ng-template>
@@ -162,6 +165,7 @@
               </div>
             </form>
           </mat-step>
+
           <mat-step [stepControl]="fourthFormGroup" [optional]="isOptional">
             <form
               [formGroup]="fourthFormGroup"
@@ -192,6 +196,8 @@
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
+
+                  <!-- primary -->
                   <div class="primary" *ngIf="isPrimary; else elseblock">
                     <mat-form-field
                       class="example-full-width"
@@ -211,8 +217,9 @@
                         </mat-option>
                       </mat-select>
                     </mat-form-field>
+
                     <mat-form-field
-                      class="example-full-width primary-class"
+                      class="example-full-width"
                       appearance="legacy"
                     >
                       <mat-label>Class</mat-label>
@@ -226,6 +233,8 @@
                       </mat-select>
                     </mat-form-field>
                   </div>
+
+                  <!-- high school -->
                   <ng-template #elseblock>
                     <mat-form-field
                       class="example-full-width"
@@ -269,6 +278,8 @@
               </div>
             </form>
           </mat-step>
+
+          <!-- upload photo -->
           <mat-step>
             <ng-template matStepLabel>Upload picture</ng-template>
             <ngx-uploadcare-widget
@@ -287,6 +298,8 @@
               <button mat-button matStepperNext>Next</button>
             </div>
           </mat-step>
+
+          <!-- final step -->
           <mat-step>
             <ng-template matStepLabel>Finish</ng-template>
 
