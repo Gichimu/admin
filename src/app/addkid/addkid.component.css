@@ -66,3 +66,15 @@
   margin: 8px 0;
   display: block;
 }
+
+
+.primary {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+
+.primary-class {
+  margin-left: 1vw;
+}

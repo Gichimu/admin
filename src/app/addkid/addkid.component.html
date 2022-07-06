@@ -162,7 +162,7 @@
               </div>
             </form>
           </mat-step>
-          <mat-step [stepControl]="fourthFormGroup">
+          <mat-step [stepControl]="fourthFormGroup" [optional]="isOptional">
             <form
               [formGroup]="fourthFormGroup"
               errorMessage="Check as appropriate."
@@ -170,13 +170,13 @@
               <ng-template matStepLabel>Academic Details</ng-template>
               <div class="form-inputs">
                 <mat-slide-toggle
-                  [(ngModel)]="isChecked"
+                  [(ngModel)]="isEnrolled"
                   (change)="changed()"
                   formControlName="enrolled"
                   >{{ checkvalue }}</mat-slide-toggle
                 >
 
-                <div *ngIf="isChecked" class="bio">
+                <div *ngIf="isEnrolled" class="bio">
                   <mat-form-field
                     class="example-full-width"
                     appearance="legacy"
@@ -192,12 +192,12 @@
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
-                  <div *ngIf="isPrimary; else elseblock">
+                  <div class="primary" *ngIf="isPrimary; else elseblock">
                     <mat-form-field
                       class="example-full-width"
                       appearance="legacy"
                     >
-                      <mat-label>School</mat-label>
+                      <mat-label>Primary school</mat-label>
                       <mat-select
                         formControlName="primarySchool"
                         name="primarySchool"
@@ -212,7 +212,7 @@
                       </mat-select>
                     </mat-form-field>
                     <mat-form-field
-                      class="example-full-width"
+                      class="example-full-width primary-class"
                       appearance="legacy"
                     >
                       <mat-label>Class</mat-label>
@@ -228,33 +228,37 @@
                   </div>
                   <ng-template #elseblock>
                     <mat-form-field
-                    class="example-full-width"
-                    appearance="legacy"
-                  >
-                    <mat-label>School</mat-label>
-                    <mat-select formControlName="school" name="school" required>
-                      <mat-option
-                        *ngFor="let school of schools"
-                        [value]="school.value"
+                      class="example-full-width"
+                      appearance="legacy"
+                    >
+                      <mat-label>High school</mat-label>
+                      <mat-select
+                        formControlName="school"
+                        name="school"
+                        required
                       >
-                        {{ school.viewValue }}
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                  <mat-form-field
-                    class="example-full-width"
-                    appearance="legacy"
-                  >
-                    <mat-label>Form</mat-label>
-                    <mat-select formControlName="form" name="form" required>
-                      <mat-option
-                        *ngFor="let form of forms"
-                        [value]="form.value"
-                      >
-                        {{ form.viewValue }}
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>
+                        <mat-option
+                          *ngFor="let school of schools"
+                          [value]="school.value"
+                        >
+                          {{ school.viewValue }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <mat-form-field
+                      class="example-full-width"
+                      appearance="legacy"
+                    >
+                      <mat-label>Form</mat-label>
+                      <mat-select formControlName="form" name="form" required>
+                        <mat-option
+                          *ngFor="let form of forms"
+                          [value]="form.value"
+                        >
+                          {{ form.viewValue }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
                   </ng-template>
                 </div>
               </div>
@@ -272,9 +276,12 @@
               (on-upload-complete)="handleUpload($event)"
               public-key="bfdb08a1fed1afb78693"
               crop="free"
+              value=""
+              clearable="true"
               image-shrink="800x600"
             >
             </ngx-uploadcare-widget>
+
             <div>
               <button mat-button matStepperPrevious>Back</button>
               <button mat-button matStepperNext>Next</button>
@@ -284,7 +291,9 @@
             <ng-template matStepLabel>Finish</ng-template>
 
             <div>
-              <button mat-button (click)="stepper.reset()">Add another</button>
+              <button mat-button (click)="stepper.reset(); reset()">
+                Add another
+              </button>
               <button mat-button (click)="uploadForm()">Submit</button>
             </div>
           </mat-step>

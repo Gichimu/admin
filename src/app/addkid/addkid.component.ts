@@ -23,14 +23,16 @@ interface Sex {
 export class AddkidComponent implements OnInit {
   opened: boolean;
   isLinear = false;
+  isOptional = true;
   isPrimary: boolean;
-  isChecked: boolean;
+  isEnrolled: boolean;
   checkvalue: string = 'not enrolled';
   photoUrl: string = '';
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   thirdFormGroup: FormGroup;
   fourthFormGroup: FormGroup;
+  fifthFormGroup: FormGroup;
 
   sexes: Sex[] = [
     { value: 'male', viewValue: 'Male' },
@@ -54,10 +56,10 @@ export class AddkidComponent implements OnInit {
   ];
 
   primarySchools: Sex[] = [
-    { value: 'st peters', viewValue: 'St Peters Kandara' },
-    { value: 'st charles', viewValue: 'St Charles Lwanga' },
-    { value: 'muraga', viewValue: 'Muraga' },
-    { value: 'kibage', viewValue: 'Kibage' },
+    { value: 'st emma', viewValue: 'St Emma' },
+    { value: 'kiboro', viewValue: 'Kiboro' },
+    { value: 'mathari', viewValue: 'Mathari' },
+    { value: 'valley view', viewValue: 'Valley View' },
   ];
 
   classes: Sex[] = [
@@ -117,21 +119,36 @@ export class AddkidComponent implements OnInit {
     });
     this.fourthFormGroup = this._formBuilder.group({
       enrolled: ['', Validators.required],
-      level: ['', Validators.required],
-      school: ['', Validators.required],
-      form: ['', Validators.required],
+      level: [''],
+      school: [''],
+      form: [''],
+      primarySchool: [''],
+      class: [''],
     });
+    // this.fifthFormGroup = this._formBuilder.group({
+    //   pic: ['', Validators.required]
+    // })
+
+    this.fourthFormGroup.get('level').valueChanges.subscribe(values => {
+      if(values == 'primary'){
+        this.isPrimary = true
+      }else{
+        this.isPrimary = false
+      }
+    })
+    
+    if(this.isOptional){
+      this.fourthFormGroup.clearValidators()
+    }
   }
 
   changed() {
-    this.isChecked
+    this.isEnrolled ? this.isOptional = false : this.isOptional = true;
+    this.isEnrolled
       ? (this.checkvalue = 'enrolled')
       : (this.checkvalue = 'not enrolled');
   }
 
-  checkLevel(){
-    console.log(this.fourthFormGroup.value.level.value)
-  }
 
   handleUpload(e) {
     this.photoUrl = e.cdnUrl;
@@ -148,12 +165,24 @@ export class AddkidComponent implements OnInit {
       nokNumber: this.secondFormGroup.value.nokCtrlNumber,
       relation: this.secondFormGroup.value.relation,
       dob: this.thirdFormGroup.value.thirdCtrl.toJSON().slice(0, 10),
+      isEnrolled: this.isEnrolled,
+      level: this.fourthFormGroup.value.level,
+      primarySchool: this.fourthFormGroup.value.primarySchool,
+      class: this.fourthFormGroup.value.class,
+      school: this.fourthFormGroup.value.school,
+      form: this.fourthFormGroup.value.form,
       photoUrl: this.photoUrl,
     };
-    // console.log(data);
 
-    this.httpService.addKid(data).subscribe((res) => {
-      console.log(res);
-    });
+    console.log(data);
+
+    // this.httpService.addKid(data).subscribe((res) => {
+    //   console.log(res);
+    // });
+  }
+
+
+  reset(){
+    
   }
 }
