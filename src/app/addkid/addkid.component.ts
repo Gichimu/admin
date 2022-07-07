@@ -44,7 +44,7 @@ export class AddkidComponent implements OnInit {
   isLinear = false;
   isOptional = true;
   isPrimary: boolean;
-  isEnrolled: boolean;
+  isEnrolled: boolean = false;
   checkvalue: string = 'not enrolled';
   photoUrl: string = '';
   firstFormGroup: FormGroup;
@@ -156,8 +156,18 @@ export class AddkidComponent implements OnInit {
       }
     })
     
-    if(this.isOptional){
-      this.fourthFormGroup.clearValidators()
+    // remove all validation if child is not enrolled
+    if(!this.isEnrolled){
+      this.fourthFormGroup.get('level').clearValidators();
+      this.fourthFormGroup.get('level').updateValueAndValidity();
+      this.fourthFormGroup.get('primarySchool').clearValidators();
+      this.fourthFormGroup.get('primarySchool').updateValueAndValidity();
+      this.fourthFormGroup.get('class').clearValidators();
+      this.fourthFormGroup.get('class').updateValueAndValidity();
+      this.fourthFormGroup.get('school').clearValidators();
+      this.fourthFormGroup.get('school').updateValueAndValidity();
+      this.fourthFormGroup.get('form').clearValidators();
+      this.fourthFormGroup.get('form').updateValueAndValidity();
     }
   }
 
@@ -166,6 +176,15 @@ export class AddkidComponent implements OnInit {
     this.isEnrolled
       ? (this.checkvalue = 'enrolled')
       : (this.checkvalue = 'not enrolled');
+    
+      // remove values from form if previously entered
+    if(!this.isEnrolled){
+      this.fourthFormGroup.value.level = "";
+      this.fourthFormGroup.value.primarySchool = "";
+      this.fourthFormGroup.value.class = "";
+      this.fourthFormGroup.value.school = "";
+      this.fourthFormGroup.value.form = "";
+    }
   }
 
 
