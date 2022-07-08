@@ -285,7 +285,7 @@
             <ngx-uploadcare-widget
               images-only="true"
               (on-upload-complete)="handleUpload($event)"
-              public-key="bfdb08a1fed1afb78693"
+              public-key="7981b7f4c18914cf6c63"
               crop="free"
               value=""
               clearable="true"
@@ -304,10 +304,10 @@
             <ng-template matStepLabel>Finish</ng-template>
 
             <div>
-              <button mat-button (click)="stepper.reset(); reset()">
+              <button mat-button (click)="stepper.reset()">
                 Add another
               </button>
-              <button mat-button (click)="uploadForm()">Submit</button>
+              <button mat-button (click)="uploadForm(); openDialog()">Confirm details</button>
             </div>
           </mat-step>
         </mat-vertical-stepper>

@@ -1,0 +1,50 @@
+<div class="container">
+  <h3 class="text-center">Confirm Child's Details</h3>
+  <div class="content">
+    <div class="left">
+      <img class="thumbnail" src="{{ data.photoUrl }}" alt="{{ data.firstName }}" />
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+
+    <div class="right text-center">
+      <h4>Bio info</h4>
+
+      <div class="bio-info">
+        <p>{{ data.firstName }} {{ data.middleName }} {{ data.lastName }}</p>
+        <!-- <p></p>
+        <p></p> -->
+        <br />
+        <p>Gender: {{ data.gender }}</p>
+        <br />
+        <p>Age: {{ age }}</p>
+      </div>
+      <mat-divider></mat-divider>
+      
+      <div class="nok">
+        <h4>Next of kin</h4>
+        <p>{{ data.nokFirstName }} {{ data.nokMiddleName }}</p>
+        <!-- <p></p> -->
+        <br />
+        <p>Relationship: {{ data.relation }}</p>
+      </div>
+
+     
+
+      <div *ngIf="data.isEnrolled">
+        <mat-divider></mat-divider>
+        
+        <div class="academic">
+          <h4>Academic Details</h4>
+          <div *ngIf="data.primarySchool; else secondaryBlock">
+            <p>School: {{ data.primarySchool }}</p>
+            <p>Class: {{ data.class }}</p>
+          </div>
+          <ng-template #secondaryBlock>
+            <p>School: {{ data.school }}</p>
+            <p>Form: {{ data.form }}</p>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

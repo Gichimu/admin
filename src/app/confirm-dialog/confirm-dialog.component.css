@@ -1,0 +1,45 @@
+.content {
+  /* max-width: 400px; */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.left, .right {
+  max-width: 40%;
+  height: auto;
+}
+
+
+.left {
+  justify-items: flex-start;
+  margin-left: 0;
+  /* margin-right: 1em; */
+}
+
+.right {
+  justify-items: flex-end;
+  margin-right: 0;
+  /* margin-left: 1em; */
+}
+
+.left img {
+  width: 100%;
+  max-width: 380px;
+  height: auto;
+}
+
+/* .bio-info, .nok, .academic {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+} */
+
+.nok, .academic {
+  margin-top: 1em;
+}
+
+h4, h3 {
+  font-weight: bold;
+}
+

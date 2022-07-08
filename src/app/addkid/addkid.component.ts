@@ -1,8 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { matDrawerAnimations } from '@angular/material/sidenav';
 import { HttpService } from '../services/http.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { SharedService } from '../services/shared.service';
+import { Observable } from 'rxjs';
 
 interface Sex {
   value: string;
@@ -28,6 +32,8 @@ interface Kid {
   photoUrl: string;
 }
 
+
+
 @Component({
   selector: 'app-addkid',
   templateUrl: './addkid.component.html',
@@ -40,12 +46,14 @@ interface Kid {
   ],
 })
 export class AddkidComponent implements OnInit {
+  // @Output() sendToDialog = new EventEmitter<any>();
   opened: boolean;
   isLinear = false;
   isOptional = true;
   isPrimary: boolean;
   isEnrolled: boolean = false;
   checkvalue: string = 'not enrolled';
+  data: Kid;
   photoUrl: string = '';
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
@@ -75,10 +83,10 @@ export class AddkidComponent implements OnInit {
   ];
 
   primarySchools: Sex[] = [
-    { value: 'st emma', viewValue: 'St Emma' },
-    { value: 'kiboro', viewValue: 'Kiboro' },
-    { value: 'mathari', viewValue: 'Mathari' },
-    { value: 'valley view', viewValue: 'Valley View' },
+    { value: 'st emma academy', viewValue: 'St Emma' },
+    { value: 'kiboro primary school', viewValue: 'Kiboro' },
+    { value: 'mathari primary school', viewValue: 'Mathari' },
+    { value: 'valley view academy', viewValue: 'Valley View' },
   ];
 
   classes: Sex[] = [
@@ -110,7 +118,9 @@ export class AddkidComponent implements OnInit {
 
   constructor(
     private _formBuilder: FormBuilder,
-    private readonly httpService: HttpService
+    private readonly httpService: HttpService,
+    private readonly sharedService: SharedService,
+    public dialog: MatDialog
   ) {}
 
   myFilter = (d: Date | null): boolean => {
@@ -138,11 +148,11 @@ export class AddkidComponent implements OnInit {
     });
     this.fourthFormGroup = this._formBuilder.group({
       enrolled: ['', Validators.required],
-      level: [''],
-      school: [''],
-      form: [''],
-      primarySchool: [''],
-      class: [''],
+      level: ['', Validators.required],
+      school: ['', Validators.required],
+      form: ['', Validators.required],
+      primarySchool: ['', Validators.required],
+      class: ['', Validators.required],
     });
     // this.fifthFormGroup = this._formBuilder.group({
     //   pic: ['', Validators.required]
@@ -185,6 +195,14 @@ export class AddkidComponent implements OnInit {
       this.fourthFormGroup.value.school = "";
       this.fourthFormGroup.value.form = "";
     }
+
+    if(this.isEnrolled && this.fourthFormGroup.value.level == 'primary'){
+      this.fourthFormGroup.value.school = "";
+      this.fourthFormGroup.value.form = "";
+    }else if(this.isEnrolled && this.fourthFormGroup.value.level == 'secondary'){
+      this.fourthFormGroup.value.primarySchool = "";
+      this.fourthFormGroup.value.class = "";
+    }
   }
 
 
@@ -193,7 +211,7 @@ export class AddkidComponent implements OnInit {
   }
 
   uploadForm() {
-    const data: Kid = {
+    this.data = {
       firstName: this.firstFormGroup.value.firstCtrl,
       middleName: this.firstFormGroup.value.secondCtrl,
       lastName: this.firstFormGroup.value.lastCtrl,
@@ -212,15 +230,19 @@ export class AddkidComponent implements OnInit {
       photoUrl: this.photoUrl,
     };
 
-    console.log(data);
+    // console.log(this.data);
 
     // this.httpService.addKid(data).subscribe((res) => {
     //   console.log(res);
     // });
+
   }
 
 
-  reset(){
-    
+  openDialog() {
+    this.dialog.open(ConfirmDialogComponent, {data: this.data})
   }
 }
+
+
+
