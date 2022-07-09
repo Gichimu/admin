@@ -17,7 +17,6 @@ export class ConfirmDialogComponent implements OnInit {
   ngOnInit(): void {
     this.age = new Date().getFullYear() - this.birthyear;
     console.log(this.data);
-
   }
 
 

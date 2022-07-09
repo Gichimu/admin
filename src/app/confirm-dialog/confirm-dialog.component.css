@@ -2,7 +2,7 @@
   /* max-width: 400px; */
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .left, .right {
@@ -23,9 +23,9 @@
   /* margin-left: 1em; */
 }
 
-.left img {
+.img-thumbnail {
   width: 100%;
-  max-width: 380px;
+  max-width: 700px;
   height: auto;
 }
 
