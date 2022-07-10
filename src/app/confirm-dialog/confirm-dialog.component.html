@@ -1,17 +1,58 @@
-<div class="container">
-  <h3 class="text-center">Confirm Child's Details</h3>
-  <div class="content">
-    <div class="left">
-      <img class="img-thumbnail" src="{{ data.photoUrl }}" alt="{{ data.firstName }}" />
+<mat-card class="example-card">
+  <mat-card-header class="text-center">
+    <mat-card-title>Confirm Child's Details</mat-card-title>
+  </mat-card-header>
+  <img mat-card-image src="{{ data.photoUrl }}" alt="{{ data.firstName }}" />
+
+  <mat-card-content>
+    <div class="inner-content">
+      <div class="bio-info">
+        <h4>Bio info</h4>
+        <p>{{ data.firstName }} {{ data.middleName }} {{ data.lastName }}</p>
+
+        <br />
+        <p>Gender: {{ data.gender }}</p>
+        <br />
+        <p>Age: {{ age }}</p>
+      </div>
+      <mat-divider [vertical]="true"></mat-divider>
+      <div class="nok">
+        <h4>Next of kin</h4>
+        <p>{{ data.nokFirstName }} {{ data.nokMiddleName }}</p>
+
+        <br />
+        <p>Relationship: {{ data.relation }}</p>
+      </div>
+
+      <div *ngIf="data.isEnrolled" class="academic">
+        <mat-divider [vertical]="true"></mat-divider>
+        <h4>Academic Details</h4>
+        <div *ngIf="data.primarySchool; else secondaryBlock">
+          <p>School: {{ data.primarySchool }}</p>
+          <p>Class: {{ data.class }}</p>
+        </div>
+        <ng-template #secondaryBlock>
+          <p>School: {{ data.school }}</p>
+          <p>Form: {{ data.form }}</p>
+        </ng-template>
+      </div>
     </div>
-    <!-- <mat-divider [vertical]="true"></mat-divider> -->
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button>LIKE</button>
+    <button mat-button>SHARE</button>
+  </mat-card-actions>
+  <!-- <div class="content">
+    <div class="left">
+      
+    </div>
+    
     <div class="right text-center">
       <h4>Bio info</h4>
 
       <div class="bio-info">
         <p>{{ data.firstName }} {{ data.middleName }} {{ data.lastName }}</p>
-        <!-- <p></p>
-        <p></p> -->
+       
         <br />
         <p>Gender: {{ data.gender }}</p>
         <br />
@@ -22,7 +63,7 @@
       <div class="nok">
         <h4>Next of kin</h4>
         <p>{{ data.nokFirstName }} {{ data.nokMiddleName }}</p>
-        <!-- <p></p> -->
+       
         <br />
         <p>Relationship: {{ data.relation }}</p>
       </div>
@@ -45,5 +86,5 @@
         </div>
       </div>
     </div>
-  </div>
-</div>
+  </div> -->
+</mat-card>

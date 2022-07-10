@@ -1,53 +1,55 @@
 .login-page {
-    top: 0;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    display: block;
-    /* background-color: #303F9F; */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    overflow: hidden;
-  }
-  
-  mat-card {
-    width: 30%;
-    margin: 5% auto;
-    border-radius: 8px;
-  }
-  mat-form-field, mat-checkbox {
-    width: 80%;
-    display: block;
-    margin: auto;
-  }
-  mat-card-content {
-    margin-top: 20px;
-  }
-  
-  .login-button {
-    margin-top: 20px;
-    display: block;
-    width: 80%;
-    margin: 20px auto;
-  }
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -10%);
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  /* background-color: #303F9F; */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
+}
 
-  .divider {
-    display: flex;
-    flex-direction: row;
-    margin-top: 1em;
-  }
+mat-card {
+  width: 30%;
+  margin: 5% auto;
+  border-radius: 8px;
+}
+mat-form-field,
+mat-checkbox {
+  width: 80%;
+  display: block;
+  margin: auto;
+}
+mat-card-content {
+  margin-top: 20px;
+}
 
-  hr {
-    border: 0;
-    width: 28%;
-    background-color: black;
-    height: 1px;
-  }
-  
-  .divider-text {
-    margin: .5em 0 1em 0;
-  }
+.login-button {
+  margin-top: 20px;
+  display: block;
+  width: 80%;
+  margin: 20px auto;
+}
 
-  
+.divider {
+  display: flex;
+  flex-direction: row;
+  margin-top: 1em;
+}
+
+hr {
+  border: 0;
+  width: 28%;
+  background-color: black;
+  height: 1px;
+}
+
+.divider-text {
+  margin: 0.5em 0 1em 0;
+}

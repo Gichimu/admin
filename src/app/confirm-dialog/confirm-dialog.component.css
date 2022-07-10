@@ -1,32 +1,58 @@
+.example-card {
+  max-width: 400px;
+  border: 0;
+}
+
+mat-card-title {
+  text-align: center;
+}
+
+.inner-content {
+  margin-top: 0;
+ display: flex;
+ flex-direction: row;
+ flex-wrap: nowrap;
+ justify-content: space-between;
+}
+
+.bio, .nok, .academic {
+  padding: .3em;
+}
+
+mat-button {
+  border: none;
+  outline: none;
+}
+
 .content {
   /* max-width: 400px; */
-  display: flex;
+  /* display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-around; */
 }
 
 .left, .right {
-  max-width: 40%;
-  height: auto;
+  /* max-width: 40%;
+  height: auto; */
 }
 
 
 .left {
-  justify-items: flex-start;
-  margin-left: 0;
+  /* justify-items: flex-start;
+  margin-left: 0; */
   /* margin-right: 1em; */
 }
 
 .right {
-  justify-items: flex-end;
-  margin-right: 0;
+  /* justify-items: flex-end;
+  margin-right: 0; */
   /* margin-left: 1em; */
 }
 
 .img-thumbnail {
-  width: 100%;
+  /* width: 100%;
   max-width: 700px;
-  height: auto;
+  height: auto; */
 }
 
 /* .bio-info, .nok, .academic {
@@ -36,7 +62,7 @@
 } */
 
 .nok, .academic {
-  margin-top: 1em;
+  /* margin-top: 1em; */
 }
 
 h4, h3 {
