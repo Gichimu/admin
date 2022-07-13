@@ -1,22 +1,38 @@
 .example-card {
-  max-width: 400px;
-  border: 0;
+  max-width: 20vw;
+  margin: 0;
 }
 
 mat-card-title {
   text-align: center;
 }
 
+
 .inner-content {
   margin-top: 0;
- display: flex;
- flex-direction: row;
- flex-wrap: nowrap;
- justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
 }
 
-.bio, .nok, .academic {
-  padding: .3em;
+.bio {
+  align-items: flex-start;
+}
+
+.nok {
+  align-items: center;
+}
+
+
+.nok, .academic {
+  margin-left: .3vw;
+}
+
+.bio,
+.nok,
+.academic {
+  /* padding: 0.3em; */
 }
 
 mat-button {
@@ -31,11 +47,11 @@ mat-button {
   justify-content: space-around; */
 }
 
-.left, .right {
+.left,
+.right {
   /* max-width: 40%;
   height: auto; */
 }
-
 
 .left {
   /* justify-items: flex-start;
@@ -61,11 +77,25 @@ mat-button {
   flex-wrap: nowrap;
 } */
 
-.nok, .academic {
+.nok,
+.academic {
   /* margin-top: 1em; */
 }
 
-h4, h3 {
+h4,
+h3 {
   font-weight: bold;
 }
 
+mat-card-actions {
+  display: flex;
+}
+
+mat-card-actions button {
+  outline: none;
+  border: none;
+}
+
+.separator {
+  flex: 1 1 auto;
+}

@@ -1,5 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, Output, EventEmitter, ViewChild, Optional } from '@angular/core';
+import { AbstractControl, FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { matDrawerAnimations } from '@angular/material/sidenav';
 import { HttpService } from '../services/http.service';
@@ -7,6 +7,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { SharedService } from '../services/shared.service';
 import { Observable } from 'rxjs';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { UcWidgetComponent } from 'ngx-uploadcare-widget';
 
 interface Sex {
   value: string;
@@ -32,8 +34,6 @@ interface Kid {
   photoUrl: string;
 }
 
-
-
 @Component({
   selector: 'app-addkid',
   templateUrl: './addkid.component.html',
@@ -46,12 +46,13 @@ interface Kid {
   ],
 })
 export class AddkidComponent implements OnInit {
-  // @Output() sendToDialog = new EventEmitter<any>();
+  @ViewChild(UcWidgetComponent) uploadcareWidget: UcWidgetComponent;
   opened: boolean;
   isLinear = false;
-  isOptional = true;
+  isOptional: boolean = true;
   isPrimary: boolean;
   isEnrolled: boolean = false;
+  picIsset: boolean = false;
   checkvalue: string = 'not enrolled';
   data: Kid;
   photoUrl: string = '';
@@ -116,6 +117,9 @@ export class AddkidComponent implements OnInit {
     { value: 'form four', viewValue: 'Form four' },
   ];
 
+  @ViewChild(UcWidgetComponent)
+  private widgetComponent: UcWidgetComponent;
+
   constructor(
     private _formBuilder: FormBuilder,
     private readonly httpService: HttpService,
@@ -154,63 +158,74 @@ export class AddkidComponent implements OnInit {
       primarySchool: ['', Validators.required],
       class: ['', Validators.required],
     });
-    // this.fifthFormGroup = this._formBuilder.group({
-    //   pic: ['', Validators.required]
+    this.fifthFormGroup = this._formBuilder.group({
+      pic: '',
+    })
+
+    // this.fourthFormGroup.get('level').valueChanges.subscribe((values) => {
+    //   if (values == 'primary') {
+    //     this.isPrimary = true;
+    //   } else {
+    //     this.isPrimary = false;
+    //   }
+    // });
+
+    // this.fourthFormGroup.value.isEnrolled.valueChanges.subscribe(data => {
+    //   console.log(data)
     // })
 
-    this.fourthFormGroup.get('level').valueChanges.subscribe(values => {
-      if(values == 'primary'){
-        this.isPrimary = true
-      }else{
-        this.isPrimary = false
-      }
-    })
-    
     // remove all validation if child is not enrolled
-    if(!this.isEnrolled){
-      this.fourthFormGroup.get('level').clearValidators();
-      this.fourthFormGroup.get('level').updateValueAndValidity();
-      this.fourthFormGroup.get('primarySchool').clearValidators();
-      this.fourthFormGroup.get('primarySchool').updateValueAndValidity();
-      this.fourthFormGroup.get('class').clearValidators();
-      this.fourthFormGroup.get('class').updateValueAndValidity();
-      this.fourthFormGroup.get('school').clearValidators();
-      this.fourthFormGroup.get('school').updateValueAndValidity();
-      this.fourthFormGroup.get('form').clearValidators();
-      this.fourthFormGroup.get('form').updateValueAndValidity();
-    }
+    // if (this.isOptional) {
+    //   this.fourthFormGroup.get('level').clearValidators();
+    //   this.fourthFormGroup.get('level').updateValueAndValidity();
+    //   this.fourthFormGroup.get('primarySchool').clearValidators();
+    //   this.fourthFormGroup.get('primarySchool').updateValueAndValidity();
+    //   this.fourthFormGroup.get('class').clearValidators();
+    //   this.fourthFormGroup.get('class').updateValueAndValidity();
+    //   this.fourthFormGroup.get('school').clearValidators();
+    //   this.fourthFormGroup.get('school').updateValueAndValidity();
+    //   this.fourthFormGroup.get('form').clearValidators();
+    //   this.fourthFormGroup.get('form').updateValueAndValidity();
+    // }
+
+
   }
 
-  changed() {
-    this.isEnrolled ? this.isOptional = false : this.isOptional = true;
+
+  changed(event: MatSlideToggleChange) {
+    this.isEnrolled = event.checked;
+    this.isOptional = event.checked;
     this.isEnrolled
       ? (this.checkvalue = 'enrolled')
       : (this.checkvalue = 'not enrolled');
-    
-      // remove values from form if previously entered
-    if(!this.isEnrolled){
-      this.fourthFormGroup.value.level = "";
-      this.fourthFormGroup.value.primarySchool = "";
-      this.fourthFormGroup.value.class = "";
-      this.fourthFormGroup.value.school = "";
-      this.fourthFormGroup.value.form = "";
+
+    // remove values from form if previously entered
+    if (!this.isEnrolled) {
+      this.fourthFormGroup.reset();
+      this.isOptional = true;
+    }else {
+      this.isOptional = false;
     }
 
-    if(this.isEnrolled && this.fourthFormGroup.value.level == 'primary'){
-      this.fourthFormGroup.value.school = "";
-      this.fourthFormGroup.value.form = "";
-    }else if(this.isEnrolled && this.fourthFormGroup.value.level == 'secondary'){
-      this.fourthFormGroup.value.primarySchool = "";
-      this.fourthFormGroup.value.class = "";
-    }
   }
 
-
+  // set the uploadcare cdnUrl
   handleUpload(e) {
     this.photoUrl = e.cdnUrl;
+    console.log(e)
   }
 
-  uploadForm() {
+  // send data to db
+  uploadData() {
+    this.httpService.addKid(this.data).subscribe((res) => {
+      console.log(res);
+    });
+
+    
+  }
+
+  // open confirm dialog
+  openDialog() {
     this.data = {
       firstName: this.firstFormGroup.value.firstCtrl,
       middleName: this.firstFormGroup.value.secondCtrl,
@@ -230,19 +245,43 @@ export class AddkidComponent implements OnInit {
       photoUrl: this.photoUrl,
     };
 
-    // console.log(this.data);
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: this.data,
+    });
 
-    // this.httpService.addKid(data).subscribe((res) => {
-    //   console.log(res);
-    // });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.uploadData();
+        this.resetForm();
+      }
+    });
+
 
   }
 
+  checkLevel($e, level: string) {
+    if ($e.isUserInput) {
+      if (level == 'primary') {
+        this.isPrimary = true;
+        this.fourthFormGroup.patchValue({
+          school: " ",
+          form: " "
+        })
+      } else {
+        this.isPrimary = false;
+        this.fourthFormGroup.patchValue({
+          primarySchool: " ",
+          class: " "
+        })
+      }
+    }
+    console.log(this.isPrimary)
+  }
 
-  openDialog() {
-    this.dialog.open(ConfirmDialogComponent, {data: this.data})
+
+  resetForm(){
+   this.uploadcareWidget.clearUploads();
   }
 }
-
 
 

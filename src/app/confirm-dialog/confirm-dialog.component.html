@@ -6,27 +6,27 @@
 
   <mat-card-content>
     <div class="inner-content">
-      <div class="bio-info">
+      <div class="bio-info text-center">
         <h4>Bio info</h4>
         <p>{{ data.firstName }} {{ data.middleName }} {{ data.lastName }}</p>
-
         <br />
-        <p>Gender: {{ data.gender }}</p>
+        <p>{{ data.gender }}</p>
         <br />
         <p>Age: {{ age }}</p>
       </div>
       <mat-divider [vertical]="true"></mat-divider>
-      <div class="nok">
+      <div class="nok text-center">
         <h4>Next of kin</h4>
         <p>{{ data.nokFirstName }} {{ data.nokMiddleName }}</p>
-
+        <br>
+        <p>{{ data.nokNumber}}</p>
         <br />
         <p>Relationship: {{ data.relation }}</p>
       </div>
 
-      <div *ngIf="data.isEnrolled" class="academic">
+      <div *ngIf="data.isEnrolled" class="academic text-center">
         <mat-divider [vertical]="true"></mat-divider>
-        <h4>Academic Details</h4>
+        <h4>Sch. Details</h4>
         <div *ngIf="data.primarySchool; else secondaryBlock">
           <p>School: {{ data.primarySchool }}</p>
           <p>Class: {{ data.class }}</p>
@@ -39,8 +39,9 @@
     </div>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-button>LIKE</button>
-    <button mat-button>SHARE</button>
+    <button mat-stroked-button mat-dialog-close>Cancel</button>
+    <span class="separator"></span>
+    <button mat-stroked-button [mat-dialog-close]="data" (click)="confirm()">Save</button>
   </mat-card-actions>
   <!-- <div class="content">
     <div class="left">

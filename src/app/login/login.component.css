@@ -46,7 +46,7 @@ mat-card-content {
 hr {
   border: 0;
   width: 28%;
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0.384);
   height: 1px;
 }
 

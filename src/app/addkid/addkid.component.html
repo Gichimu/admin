@@ -174,8 +174,8 @@
               <ng-template matStepLabel>Academic Details</ng-template>
               <div class="form-inputs">
                 <mat-slide-toggle
-                  [(ngModel)]="isEnrolled"
-                  (change)="changed()"
+                  [checked]="isEnrolled"
+                  (change)="changed($event)"
                   formControlName="enrolled"
                   >{{ checkvalue }}</mat-slide-toggle
                 >
@@ -190,7 +190,7 @@
                       <mat-option
                         *ngFor="let level of levels"
                         [value]="level.value"
-                        (selectionChange)="checkLevel()"
+                        (onSelectionChange)="checkLevel($event, level.value)"
                       >
                         {{ level.viewValue }}
                       </mat-option>
@@ -280,23 +280,29 @@
           </mat-step>
 
           <!-- upload photo -->
-          <mat-step>
-            <ng-template matStepLabel>Upload picture</ng-template>
-            <ngx-uploadcare-widget
-              images-only="true"
-              (on-upload-complete)="handleUpload($event)"
-              public-key="7981b7f4c18914cf6c63"
-              crop="free"
-              value=""
-              clearable="true"
-              image-shrink="800x600"
+          <mat-step [stepControl]="fifthFormGroup" [optional]="isOptional">
+            <form
+              [formGroup]="fifthFormGroup"
+              errorMessage="A pic is required."
             >
-            </ngx-uploadcare-widget>
-
-            <div>
-              <button mat-button matStepperPrevious>Back</button>
-              <button mat-button matStepperNext>Next</button>
-            </div>
+              <ng-template matStepLabel>Upload picture</ng-template>
+              <ngx-uploadcare-widget
+                images-only="true"
+                (on-upload-complete)="handleUpload($event)"
+                public-key="7981b7f4c18914cf6c63"
+                crop="free"
+                value=""
+                clearable="true"
+                image-shrink="800x600"
+                required
+              >
+              </ngx-uploadcare-widget>
+              
+              <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext>Next</button>
+              </div>
+            </form>
           </mat-step>
 
           <!-- final step -->
@@ -304,10 +310,8 @@
             <ng-template matStepLabel>Finish</ng-template>
 
             <div>
-              <button mat-button (click)="stepper.reset()">
-                Add another
-              </button>
-              <button mat-button (click)="uploadForm(); openDialog()">Confirm details</button>
+              <button mat-button (click)="stepper.reset(); resetForm()">Add another</button>
+              <button mat-button (click)="openDialog()">Confirm details</button>
             </div>
           </mat-step>
         </mat-vertical-stepper>
