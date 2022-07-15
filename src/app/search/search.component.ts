@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpService } from '../services/http.service';
 import { Kid } from '../kid';
@@ -12,6 +12,8 @@ interface TableData {
   pic: string
 }
 
+
+
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -19,45 +21,38 @@ interface TableData {
 })
 export class SearchComponent implements OnInit {
   value = '';
-  kid: Kid;
   isLoading = true;
-  school: string;
-  users$: Observable<any>
-  pics$: Observable<any>
+  
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ELEMENT_DATA: Kid[] = [];
 
-  displayedColumns: string[] = ['Position', 'Pic', 'first name', 'Middle name', 'Level', 'Nok', 'Contact', 'Actions'];
+  displayedColumns: string[] = ['Pic', 'First name', 'Middle name', 'Gender', 'Level', 'Nok', 'Contact', 'Actions'];
   dataSource = new MatTableDataSource<Kid>(this.ELEMENT_DATA);
 
 
   constructor(private readonly httpService: HttpService, private readonly dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.getAllData();
+    this.getAllKids();
     setTimeout(() => {
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
     });
-    
   }
 
-  getAllData(): void{
-    this.httpService.getKids().subscribe(kids => {
-      this.isLoading = false
-      this.dataSource = kids
-      console.log(kids)
-    });
-    
-  }
+  
 
-  filterByName(filterText: string): void{
-    this.dataSource.filter = filterText.trim().toLowerCase()
-  }
+  filterByName(event: Event): void{
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
 
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
   // open dialog to display kid info
   getKidInfo(row: string){
     this.dialog.open(DialogContentDialog, {
@@ -65,10 +60,22 @@ export class SearchComponent implements OnInit {
     })
   }
 
+  // remove item
   delete(id){
     console.log(id)
   }
+
+  // get all kids
+  getAllKids(){
+    this.httpService.getKids().subscribe(kids => {
+      this.isLoading = false
+      this.dataSource.data = kids as Kid[]
+      
+    });
+  }
+  
 }
+
 
 
 @Component({

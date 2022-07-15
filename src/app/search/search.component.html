@@ -3,45 +3,30 @@
     <mat-form-field class="example-form-field">
       <input
         matInput
-        (keyup)="filterByName($event.target.value)"
-        placeholder="Filter by name"
+        (keyup)="filterByName($event)"
+        placeholder="Filter data"
         [(ngModel)]="value"
         type="text"
       />
-      <button
-        *ngIf="value"
-        matSuffix
-        mat-icon-button
-        aria-label="Clear"
-        (click)="value = ''"
-      >
-        <mat-icon>close</mat-icon>
-      </button>
+     
     </mat-form-field>
     <mat-table [dataSource]="dataSource" matSort>
-      <!-- Position Column -->
-      <ng-container matColumnDef="Position">
-        <mat-header-cell *matHeaderCellDef> Position </mat-header-cell>
-        <mat-cell *matCellDef="let element">
-          {{ dataSource.indexOf(element) + 1 }}
-        </mat-cell>
-      </ng-container>
 
-      <!-- Position Column -->
+      <!-- Photo Column -->
       <ng-container matColumnDef="Pic">
         <mat-header-cell *matHeaderCellDef> Photo </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{ element.country }} </mat-cell>
       </ng-container>
 
-      <!-- Name Column -->
-      <ng-container matColumnDef="first name">
+      <!-- First Name Column -->
+      <ng-container matColumnDef="First name">
         <mat-header-cell *matHeaderCellDef mat-sort-header
           >First name
         </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{ element.firstName }} </mat-cell>
       </ng-container>
 
-      <!-- Name Column -->
+      <!-- Middle Name Column -->
       <ng-container matColumnDef="Middle name">
         <mat-header-cell *matHeaderCellDef mat-sort-header
           >Middle name
@@ -51,13 +36,23 @@
         </mat-cell>
       </ng-container>
 
-      <!-- Weight Column -->
+      <!-- Gender Column -->
+      <ng-container matColumnDef="Gender">
+        <mat-header-cell *matHeaderCellDef mat-sort-header
+          >Gender
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.gender }}
+        </mat-cell>
+      </ng-container>
+
+      <!-- Level Column -->
       <ng-container matColumnDef="Level">
         <mat-header-cell *matHeaderCellDef> Level </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{ element.level }} </mat-cell>
       </ng-container>
 
-      <!-- Symbol Column -->
+      <!-- Next of kin name Column -->
       <ng-container matColumnDef="Nok">
         <mat-header-cell *matHeaderCellDef> Next of kin </mat-header-cell>
         <mat-cell *matCellDef="let element">
@@ -65,11 +60,13 @@
         </mat-cell>
       </ng-container>
 
+      <!-- Next of kin Number column -->
       <ng-container matColumnDef="Contact">
         <mat-header-cell *matHeaderCellDef> Contact </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{ element.nokNumber }} </mat-cell>
       </ng-container>
 
+      <!-- Actions column -->
       <ng-container matColumnDef="Actions">
         <mat-header-cell *matHeaderCellDef> </mat-header-cell>
         <mat-cell *matCellDef="let element">
@@ -89,13 +86,18 @@
         *matRowDef="let row; columns: displayedColumns"
         (click)="getKidInfo(row)"
       ></mat-row>
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" [attr.colspan]="displayedColumns.length">
+          No records found.
+        </td>
+      </tr>
     </mat-table>
     <mat-paginator
-      [pageSize]="5"
+      [pageSize]="10"
       [pageSizeOptions]="[5, 10, 20]"
       showFirstLastButtons
     ></mat-paginator>
-    <div class="center">
+    <div *ngIf="isLoading" class="center">
       <mat-spinner *ngIf="isLoading"></mat-spinner>
     </div>
   </mat-card-content>
