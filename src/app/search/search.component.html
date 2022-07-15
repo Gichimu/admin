@@ -1,59 +1,102 @@
-<div class="container">
-  <div class="content">
-    <mat-card>
-      <mat-card-header>
-        <mat-form-field
-          class="example-form-field text-center"
-          appearance="legacy"
-        >
-          <mat-label>Enter keyword to search</mat-label>
-          <input matInput type="text" [(ngModel)]="value" />
-          <button
-            *ngIf="value"
-            matSuffix
-            mat-icon-button
-            aria-label="Clear"
-            (click)="value = ''"
-          >
-            <mat-icon>close</mat-icon>
+<mat-card class="example-card">
+  <mat-card-content class="text-center">
+    <mat-form-field class="example-form-field">
+      <input
+        matInput
+        (keyup)="filterByName($event.target.value)"
+        placeholder="Filter by name"
+        [(ngModel)]="value"
+        type="text"
+      />
+      <button
+        *ngIf="value"
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        (click)="value = ''"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+    <mat-table [dataSource]="dataSource" matSort>
+      <!-- Position Column -->
+      <ng-container matColumnDef="Position">
+        <mat-header-cell *matHeaderCellDef> Position </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ dataSource.indexOf(element) + 1 }}
+        </mat-cell>
+      </ng-container>
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="Pic">
+        <mat-header-cell *matHeaderCellDef> Photo </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.country }} </mat-cell>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="first name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header
+          >First name
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.firstName }} </mat-cell>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="Middle name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header
+          >Middle name
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.middleName }}
+        </mat-cell>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="Level">
+        <mat-header-cell *matHeaderCellDef> Level </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.level }} </mat-cell>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="Nok">
+        <mat-header-cell *matHeaderCellDef> Next of kin </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.nokFirstName }}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Contact">
+        <mat-header-cell *matHeaderCellDef> Contact </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.nokNumber }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Actions">
+        <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <button mat-icon-button>
+            <mat-icon color="primary">edit</mat-icon></button
+          ><mat-divider [vertical]="true"></mat-divider>
+          <button mat-icon-button>
+            <mat-icon color="accent" click="delete(element._id)"
+              >delete</mat-icon
+            >
           </button>
-        </mat-form-field>
-        <span class="preferences-icons">
-            <button color="default" mat-flat-button><mat-icon>apps</mat-icon></button>
-            <span class="divider"></span>
-            <button color="default" mat-flat-button><mat-icon>list</mat-icon></button>
-        </span>
-      </mat-card-header>
-      <!-- <mat-divider></mat-divider> -->
-      <mat-card-content>
-       <div fxLayout="row wrap">
-        <div fxFlex="33%" class="inner-content" *ngFor="let user of users$ , let pic of pics$">
-          
-            <mat-card class="example-card">
-              <mat-card-header>
-                <!-- <div mat-card-avatar class="example-header-image"></div> -->
-                <mat-card-title>{{user.name}}</mat-card-title>
-                <mat-card-subtitle>{{user.email}}</mat-card-subtitle>
-              </mat-card-header>
-              <img
-                mat-card-image
-                src="{{pic.url}}"
-                alt="Photo of a Shiba Inu"
-              />
-              <mat-card-content>
-                <p>
-                  The Shiba Inu is the smallest of the six original and distinct
-                  spitz breeds of dog from Japan. 
-                </p>
-              </mat-card-content>
-              <mat-card-actions>
-                <button mat-button>LIKE</button>
-                <button mat-button>SHARE</button>
-              </mat-card-actions>
-            </mat-card>
-          </div>
-       </div>
-      </mat-card-content>
-    </mat-card>
-  </div>
-</div>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row
+        *matRowDef="let row; columns: displayedColumns"
+        (click)="getKidInfo(row)"
+      ></mat-row>
+    </mat-table>
+    <mat-paginator
+      [pageSize]="5"
+      [pageSizeOptions]="[5, 10, 20]"
+      showFirstLastButtons
+    ></mat-paginator>
+    <div class="center">
+      <mat-spinner *ngIf="isLoading"></mat-spinner>
+    </div>
+  </mat-card-content>
+</mat-card>

@@ -20,6 +20,7 @@ export class HeaderComponent implements OnInit {
     this.authService.logout().subscribe(authState => {
       console.log(authState)
       this.ngOnDestroy();
+      localStorage.setItem('user', null);
       this.router.navigate(['login']);
     })
   }

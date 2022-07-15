@@ -9,6 +9,7 @@ import { AuthService } from '../services/auth.service';
 import { Observable } from 'rxjs';
 import { SearchComponent } from '../search/search.component';
 
+
 @Component({
   selector: 'app-sidenav',
   templateUrl: './sidenav.component.html',
@@ -16,9 +17,7 @@ import { SearchComponent } from '../search/search.component';
 })
 export class SidenavComponent implements OnInit {
   open = false;
-  displayName: string;
-  email: string;
-  photoUrl: string;
+  user: User;
   navigatedRoute: any; 
   contentMargin = 245;
 
@@ -29,11 +28,7 @@ export class SidenavComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.authService.user$.subscribe(user => {
-      this.displayName = user.displayName
-      this.email = user.email
-      this.photoUrl = user.photoURL
-    });
+    this.user = JSON.parse(localStorage.getItem('user'));
   }
 
   getRoute(myRoute: string) {

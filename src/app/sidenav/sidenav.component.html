@@ -17,8 +17,8 @@
         <span>
           
           <button class="menu-item profile" type="button" (click)="getRoute('profile')"  mat-mini-fab>
-            <img class="menu-img" src="{{photoUrl}}" alt="">
-            <span class="menu-name">{{displayName}}</span>
+            <img class="menu-img" src="{{user.photoUrl}}" alt="">
+            <span class="menu-name">{{user.displayName}}</span>
           </button>
           
           <mat-divider></mat-divider>
@@ -34,9 +34,9 @@
             <button class="menu-item" type="button" mat-button (click)="getRoute('search')">
               <mat-icon class="menu-icon">search</mat-icon>Quick search
             </button>
-            <button class="menu-item exit" type="button" mat-button (click)="drawer.toggle()">
+            <!-- <button class="menu-item exit" type="button" mat-button (click)="drawer.toggle()">
               <mat-icon class="menu-icon">logout</mat-icon> Exit 
-            </button>
+            </button> -->
           </div>
         </span>
       </div>

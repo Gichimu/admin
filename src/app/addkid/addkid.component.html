@@ -280,7 +280,7 @@
           </mat-step>
 
           <!-- upload photo -->
-          <mat-step [stepControl]="fifthFormGroup" [optional]="isOptional">
+          <mat-step [stepControl]="fifthFormGroup" >
             <form
               [formGroup]="fifthFormGroup"
               errorMessage="A pic is required."
@@ -310,7 +310,7 @@
             <ng-template matStepLabel>Finish</ng-template>
 
             <div>
-              <button mat-button (click)="stepper.reset(); resetForm()">Add another</button>
+              <button mat-button (click)="resetForm()">Add another</button>
               <button mat-button (click)="openDialog()">Confirm details</button>
             </div>
           </mat-step>

@@ -20,6 +20,9 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [],
@@ -56,7 +59,10 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatButtonToggleModule,
     MatSelectModule,
     MatSlideToggleModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatProgressSpinnerModule
   ]
 })
 export class AppMaterialModule { }

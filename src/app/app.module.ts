@@ -18,6 +18,7 @@ import { HeaderComponent } from './header/header.component';
 import { SearchComponent } from './search/search.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { CheckDialogComponent } from './check-dialog/check-dialog.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     ProfileComponent,
     HeaderComponent,
     SearchComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    CheckDialogComponent
   ],
   imports: [
     BrowserModule,

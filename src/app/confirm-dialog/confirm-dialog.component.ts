@@ -21,6 +21,10 @@ export class ConfirmDialogComponent implements OnInit {
     this.age = new Date().getFullYear() - this.birthyear;
   }
 
+  cancel() {
+    this.dialogRef.close()
+  }
+
   confirm() {
     this.dialogRef.close({event: 'save'})
   }

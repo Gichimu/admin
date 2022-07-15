@@ -9,29 +9,12 @@ import { SharedService } from '../services/shared.service';
 import { Observable } from 'rxjs';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { UcWidgetComponent } from 'ngx-uploadcare-widget';
+import { CheckDialogComponent } from '../check-dialog/check-dialog.component';
+import { Kid } from '../kid';
 
 interface Sex {
   value: string;
   viewValue: string;
-}
-
-interface Kid {
-  firstName: string;
-  middleName: string;
-  lastName?: string;
-  gender: string;
-  nokFirstName: string;
-  nokMiddleName: string;
-  nokNumber: number;
-  relation: string;
-  dob: Date;
-  isEnrolled: boolean;
-  level?: string;
-  primarySchool?: string;
-  class?: string;
-  school?: string;
-  form?: string;
-  photoUrl: string;
 }
 
 @Component({
@@ -47,6 +30,7 @@ interface Kid {
 })
 export class AddkidComponent implements OnInit {
   @ViewChild(UcWidgetComponent) uploadcareWidget: UcWidgetComponent;
+  @ViewChild('stepper') stepper;
   opened: boolean;
   isLinear = false;
   isOptional: boolean = true;
@@ -86,7 +70,7 @@ export class AddkidComponent implements OnInit {
   primarySchools: Sex[] = [
     { value: 'st emma academy', viewValue: 'St Emma' },
     { value: 'kiboro primary school', viewValue: 'Kiboro' },
-    { value: 'mathari primary school', viewValue: 'Mathari' },
+    { value: 'thika prime academy', viewValue: 'Thika Prime Academy' },
     { value: 'valley view academy', viewValue: 'Valley View' },
   ];
 
@@ -106,7 +90,7 @@ export class AddkidComponent implements OnInit {
   schools: Sex[] = [
     { value: 'st peters', viewValue: 'St Peters Kandara' },
     { value: 'st charles', viewValue: 'St Charles Lwanga' },
-    { value: 'muraga', viewValue: 'Muraga' },
+    { value: 'chania boys', viewValue: 'Chania Boys' },
     { value: 'kibage', viewValue: 'Kibage' },
   ];
 
@@ -117,8 +101,8 @@ export class AddkidComponent implements OnInit {
     { value: 'form four', viewValue: 'Form four' },
   ];
 
-  @ViewChild(UcWidgetComponent)
-  private widgetComponent: UcWidgetComponent;
+  // @ViewChild(UcWidgetComponent)
+  // private widgetComponent: UcWidgetComponent;
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -160,34 +144,7 @@ export class AddkidComponent implements OnInit {
     });
     this.fifthFormGroup = this._formBuilder.group({
       pic: '',
-    })
-
-    // this.fourthFormGroup.get('level').valueChanges.subscribe((values) => {
-    //   if (values == 'primary') {
-    //     this.isPrimary = true;
-    //   } else {
-    //     this.isPrimary = false;
-    //   }
-    // });
-
-    // this.fourthFormGroup.value.isEnrolled.valueChanges.subscribe(data => {
-    //   console.log(data)
-    // })
-
-    // remove all validation if child is not enrolled
-    // if (this.isOptional) {
-    //   this.fourthFormGroup.get('level').clearValidators();
-    //   this.fourthFormGroup.get('level').updateValueAndValidity();
-    //   this.fourthFormGroup.get('primarySchool').clearValidators();
-    //   this.fourthFormGroup.get('primarySchool').updateValueAndValidity();
-    //   this.fourthFormGroup.get('class').clearValidators();
-    //   this.fourthFormGroup.get('class').updateValueAndValidity();
-    //   this.fourthFormGroup.get('school').clearValidators();
-    //   this.fourthFormGroup.get('school').updateValueAndValidity();
-    //   this.fourthFormGroup.get('form').clearValidators();
-    //   this.fourthFormGroup.get('form').updateValueAndValidity();
-    // }
-
+    });
 
   }
 
@@ -203,6 +160,7 @@ export class AddkidComponent implements OnInit {
     if (!this.isEnrolled) {
       this.fourthFormGroup.reset();
       this.isOptional = true;
+
     }else {
       this.isOptional = false;
     }
@@ -212,7 +170,6 @@ export class AddkidComponent implements OnInit {
   // set the uploadcare cdnUrl
   handleUpload(e) {
     this.photoUrl = e.cdnUrl;
-    console.log(e)
   }
 
   // send data to db
@@ -220,8 +177,6 @@ export class AddkidComponent implements OnInit {
     this.httpService.addKid(this.data).subscribe((res) => {
       console.log(res);
     });
-
-    
   }
 
   // open confirm dialog
@@ -253,6 +208,9 @@ export class AddkidComponent implements OnInit {
       if (result) {
         this.uploadData();
         this.resetForm();
+        this.dialog.open(CheckDialogComponent)
+      }else {
+        this.resetForm();
       }
     });
 
@@ -275,13 +233,12 @@ export class AddkidComponent implements OnInit {
         })
       }
     }
-    console.log(this.isPrimary)
+  
   }
 
 
   resetForm(){
    this.uploadcareWidget.clearUploads();
+   this.stepper.reset()
   }
 }
-
-
