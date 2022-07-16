@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ViewChildComponent } from '../view-child/view-child.component';
 
 
 interface TableData {
@@ -55,7 +56,7 @@ export class SearchComponent implements OnInit {
   }
   // open dialog to display kid info
   getKidInfo(row: string){
-    this.dialog.open(DialogContentDialog, {
+    this.dialog.open(ViewChildComponent, {
       data: row
     })
   }
@@ -74,15 +75,8 @@ export class SearchComponent implements OnInit {
     });
   }
   
+  capitalizeFirstLetter(name) {
+    return name.charAt(0).toUpperCase() + name.slice(1)
+  }
 }
 
-
-
-@Component({
-  selector: 'dialog-content-dialog',
-  templateUrl: 'dialog-content-dialog.html',
-  styleUrls: ['dialog-content-dialog.css'],
-})
-export class DialogContentDialog {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any){}
-}

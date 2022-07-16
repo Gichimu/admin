@@ -1,0 +1,24 @@
+<mat-card class="example-card">
+  <img
+    mat-card-image
+    src="{{data.photoUrl}}"
+    alt="Photo of a Shiba Inu"
+  />
+  <mat-card-content>
+    <p>
+        {{capitalizeFirstLetter(data.firstName)}} {{capitalizeFirstLetter(data.middleName)}}
+    </p>
+    <p>{{age}}</p>
+    <div *ngIf="data.level == 'secondary'; else primary">
+        <p>{{capitalizeFirstLetter(data.school)}}</p>
+    </div>
+    <ng-template #primary>
+        <p>{{capitalizeFirstLetter(data.primarySchool)}}</p>
+    </ng-template>
+  </mat-card-content>
+  <mat-card-actions>
+    <div></div>
+    <span class="separator"></span>
+    <button mat-button mat-dialog-close>OK</button>
+  </mat-card-actions>
+</mat-card>

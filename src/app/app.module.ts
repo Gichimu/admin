@@ -19,6 +19,7 @@ import { SearchComponent } from './search/search.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { CheckDialogComponent } from './check-dialog/check-dialog.component';
+import { ViewChildComponent } from './view-child/view-child.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { CheckDialogComponent } from './check-dialog/check-dialog.component';
     HeaderComponent,
     SearchComponent,
     ConfirmDialogComponent,
-    CheckDialogComponent
+    CheckDialogComponent,
+    ViewChildComponent
   ],
   imports: [
     BrowserModule,

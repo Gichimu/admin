@@ -10,7 +10,7 @@ mat-card-content {
   grid-template-columns: auto auto;
 }
 .example-card {
-  max-width: 75%;
+  max-width: 100%;
   margin: .5em;
 }
 
@@ -41,6 +41,10 @@ mat-icon {
   transform: scale(.8);
 }
 
+button {
+  outline: none;
+}
+
 .center {
   position: absolute;
   top: 50%;
@@ -54,8 +58,22 @@ mat-icon {
   justify-content: center;
 }
 
-tr .mat-row {
+.error-row {
   display: flex;
   justify-content: center;
   align-items: center;
+  border-bottom: none;
+}
+
+.thumbnail {
+  width: 100%;
+  max-width: 50px;
+  height: auto;
+}
+
+.divider {
+  width: 1px;
+  height: .7em;
+  border-left: 1px solid rgba(199, 196, 196, 0.219);
+  margin-top: .3em;
 }

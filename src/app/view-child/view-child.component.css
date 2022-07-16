@@ -1,0 +1,28 @@
+.example-card {
+  max-width: 400px;
+}
+
+mat-card-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+mat-card-actions {
+    display: flex;
+}
+
+mat-card-actions button {
+    outline: none;
+}
+
+mat-card-image {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+}
+
+.separator {
+    flex: 1 1 auto;
+}
+
