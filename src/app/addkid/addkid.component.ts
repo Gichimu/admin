@@ -90,6 +90,8 @@ export class AddkidComponent implements OnInit {
   schools: Sex[] = [
     { value: 'st peters', viewValue: 'St Peters Kandara' },
     { value: 'st charles', viewValue: 'St Charles Lwanga' },
+    { value: 'st teresas boys', viewValue: 'St Teresas Boys' },
+    { value: 'maina wanjigi girls hs', viewValue: 'Maina Wanjigi Sec Sch.' },
     { value: 'chania boys', viewValue: 'Chania Boys' },
     { value: 'kibage', viewValue: 'Kibage' },
   ];
