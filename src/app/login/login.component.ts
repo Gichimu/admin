@@ -8,6 +8,7 @@ import firebase from 'firebase/app';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from '../user';
+import { HttpService } from '../services/http.service';
 
 @Component({
   selector: 'app-login',
@@ -27,6 +28,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   user$: Observable<firebase.User> = this.authService.user$;
   constructor(
     private readonly authService: AuthService,
+    private readonly httpService: HttpService,
     private readonly router: Router,
     private readonly snackbar: MatSnackBar
   ) {}
@@ -67,12 +69,17 @@ export class LoginComponent implements OnInit, OnDestroy {
           photoUrl: authState.user.photoURL
         }
 
+        // create token
+        
+
         // save the user object in localstorage
         localStorage.setItem('user', JSON.stringify(user));
+        this.getToken();
         this.router.navigate(['home']);
       });
   }
 
+  
   createUser(): void {
     this.authService
       .create(this.modelEmail, this.modelPassword)
@@ -101,5 +108,14 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.destroyed$.next();
+  }
+
+  // get the jwt token and set it on localstorage
+  getToken(){
+    this.httpService.getToken().subscribe(token => {
+      localStorage.setItem('token', token);
+    });
+
+
   }
 }

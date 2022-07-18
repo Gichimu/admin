@@ -93,7 +93,7 @@ export class AddkidComponent implements OnInit {
     { value: 'st teresas boys', viewValue: 'St Teresas Boys' },
     { value: 'maina wanjigi girls hs', viewValue: 'Maina Wanjigi Sec Sch.' },
     { value: 'chania boys', viewValue: 'Chania Boys' },
-    { value: 'kibage', viewValue: 'Kibage' },
+    { value: 'kibage', viewValue: 'Kibage' }
   ];
 
   forms: Sex[] = [
