@@ -1,3 +1,4 @@
+
 .login-page {
   position: absolute;
   top: 20%;
@@ -32,9 +33,17 @@ mat-card-content {
 
 .login-button {
   margin-top: 20px;
+
   display: block;
   width: 80%;
   margin: 20px auto;
+}
+
+.google {
+  background-color: transparent;
+  background-blend-mode: lighten;
+  height: 2vh;
+  margin: .5em;
 }
 
 .divider {

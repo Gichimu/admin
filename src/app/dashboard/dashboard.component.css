@@ -1,0 +1,30 @@
+.example-card {
+  max-width: 400px;
+  margin: 1em;
+}
+
+.example-card:hover {
+  transform: scale(1.04);
+}
+
+.container {
+  width: 70vw;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.content {
+  width: 25%;
+}
+
+.kid-img {
+  /* width: 100%;
+    max-width: 400px;
+    height: auto; */
+}
+
+mat-card-actions button {
+    outline: none;
+}
